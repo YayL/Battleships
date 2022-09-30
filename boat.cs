@@ -19,6 +19,8 @@ namespace Battleships {
 
 		private byte rotation;
 
+		public bool sunk = false;
+
 		public Boat(byte width, byte height) {
 			this.width = width;
 			this.height = height;
@@ -31,7 +33,6 @@ namespace Battleships {
 			byte prev = this.rotation;
 			this.rotation = (byte)((4 + this.rotation + rotation) % 4);
 			if (this.is_out_of_bounds()) {
-				Console.WriteLine("EEEE");
 				this.rotation = prev;
 			}
 		}
@@ -39,9 +40,9 @@ namespace Battleships {
 		public void transform(sbyte x, sbyte y) {
 			this.xStart = (sbyte)(this.xStart + x);
 			this.yStart = (sbyte)(this.yStart + y);
-			if (this.is_out_of_bounds()) {
-				this.xStart = (sbyte)(this.xStart - x);
+			if (this.is_out_of_bounds()) { 
 				this.yStart = (sbyte)(this.yStart - y);
+				this.xStart = (sbyte)(this.xStart - x);
 			}
 		}
 

@@ -15,19 +15,29 @@ namespace Battleships {
 			menu.add_entry("Keybindings");
 			menu.add_entry("Exit");
 			menu.set_title_offset(2);
-			int selected = menu.start();
-			switch (selected) {
-				case 0:
-					new Game();
-					break;
-				case 1:
-					Console.WriteLine("Not implemented yet");
-					break;
-				case 2:
-					break;
-				default:
-					Console.WriteLine("ERROR: Something wrong with menu selection!");
-					break;
+			while (true) {
+				switch (menu.start()) {
+					case 0:
+						new Game();
+						break;
+					case 1:
+						Console.Clear();
+						Console.SetCursorPosition(0, 7);
+						print_center("wasd = movement");
+						print_center("Q - Counter clockwise rotation");
+						print_center("E - Clockwise rotation");
+						print_center("Enter - Place / Check");
+						Console.SetCursorPosition(0, (Console.WindowHeight / 2) + Program.HEIGHT);
+						Program.print_center("Press any key to continue..");
+						Console.ReadKey(true);
+						break;
+					case 2:
+						return;
+						break;
+					default:
+						Console.WriteLine("ERROR: Something wrong with menu selection!");
+						break;
+				}
 			}
 		}
 
@@ -41,8 +51,7 @@ namespace Battleships {
 		}
 
 		public static void print_center(string out_text) {
-
-			Console.Write(new String(' ', (Console.WindowWidth - out_text.Length) / 2));
+			Console.SetCursorPosition((Console.WindowWidth - out_text.Length) >> 1, Console.CursorTop);
 			Console.WriteLine(out_text);
 		}
  
